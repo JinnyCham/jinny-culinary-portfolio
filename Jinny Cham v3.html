@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jinny Cham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg:      #F4EFE6;
+  --white:   #FDFAF6;
+  --stone:   #E8E1D2;
+  --oat:     #DDD5C2;
+  --gold:    #B8924A;
+  --amber:   #A07838;
+  --ink:     #1C1410;
+  --mid:     #5C5048;
+  --soft:    #8A8078;
+  --border:  rgba(28,20,16,0.1);
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--gold); color: var(--white); }
+
+/* ─── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.4rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(244,239,230,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.4s;
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1rem; font-style: italic;
+  color: var(--ink); text-decoration: none; letter-spacing: 0.04em;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink); color: var(--white) !important;
+  padding: 0.5rem 1.4rem; border-radius: 2rem; transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold) !important; }
+
+/* ─── HERO ────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  align-items: center; gap: 6rem;
+  max-width: 1160px; margin: 0 auto;
+  padding: 10rem 4rem 6rem;
+}
+.hero-label {
+  font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+.hero-label::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+h1.hero-name {
+  font-family: var(--serif); font-size: clamp(4rem, 7.5vw, 7.2rem);
+  font-weight: 400; line-height: 0.9; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 0.7rem;
+}
+h1.hero-name em { font-style: italic; color: var(--gold); display: block; }
+.hero-headline {
+  font-family: var(--serif); font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  font-style: italic; color: var(--mid); margin-bottom: 0.5rem;
+  font-weight: 300; line-height: 1.4;
+}
+.hero-sub {
+  font-size: 0.8rem; letter-spacing: 0.04em;
+  color: var(--soft); margin-bottom: 1.6rem;
+}
+.hero-body {
+  font-size: 0.9rem; color: var(--mid); max-width: 29rem;
+  line-height: 1.9; margin-bottom: 2.8rem;
+}
+.hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn-ink {
+  background: var(--ink); color: var(--white);
+  padding: 0.8rem 2rem; border-radius: 3rem;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; border: 1.5px solid var(--ink); transition: all 0.25s;
+}
+.btn-ink:hover { background: var(--gold); border-color: var(--gold); }
+.btn-line {
+  border: 1.5px solid rgba(28,20,16,0.3); color: var(--ink);
+  padding: 0.8rem 2rem; border-radius: 3rem;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.25s;
+}
+.btn-line:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* Hero gallery */
+.hero-gallery-wrap { display: flex; flex-direction: column; gap: 0.9rem; }
+.gallery-eyebrow {
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft);
+}
+.gallery-frame {
+  position: relative; border-radius: 3px; overflow: hidden;
+  aspect-ratio: 3/4; box-shadow: 20px 28px 72px rgba(28,20,16,0.18);
+}
+.gslide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
+.gslide.active { opacity: 1; }
+.gslide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(0.85) contrast(1.02); }
+.gcaption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 3rem 1.5rem 1.3rem;
+  background: linear-gradient(to top, rgba(28,20,16,0.72), transparent);
+  font-family: var(--serif); font-style: italic; font-size: 0.82rem;
+  color: rgba(253,250,246,0.85); line-height: 1.4;
+}
+.gdots { display: flex; gap: 0.5rem; }
+.gdot { height: 2px; width: 18px; background: var(--border); border-radius: 2px; cursor: pointer; transition: all 0.3s; }
+.gdot.active { background: var(--gold); width: 30px; }
+
+/* ─── SECTION SHARED ──────────────────────────────── */
+.sec { position: relative; }
+.w { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+.sp { padding: 8rem 0; }
+.sp-sm { padding: 6rem 0; }
+.lbl {
+  font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); display: block; margin-bottom: 0.5rem;
+}
+.h2 {
+  font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400; color: var(--ink); line-height: 1.1;
+}
+.h2 em { font-style: italic; color: var(--gold); }
+.rule { width: 2rem; height: 1px; background: var(--gold); margin: 1.4rem 0; }
+
+/* ─── ABOUT ───────────────────────────────────────── */
+#about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+.about-photo { position: relative; border-radius: 3px; overflow: hidden; box-shadow: 12px 20px 60px rgba(28,20,16,0.14); }
+.about-photo img { width: 100%; object-fit: cover; filter: saturate(0.86); display: block; }
+.about-photo-foot {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.5rem 1.5rem 1.2rem;
+  background: linear-gradient(to top, rgba(28,20,16,0.6), transparent);
+  font-family: var(--serif); font-style: italic; font-size: 0.78rem;
+  color: rgba(253,250,246,0.82);
+}
+.about-body p { font-size: 0.93rem; color: var(--mid); line-height: 1.92; margin-bottom: 1.1rem; }
+.about-body p:last-child { margin-bottom: 0; }
+.about-quote {
+  margin-top: 2.2rem; padding: 1.4rem 1.8rem;
+  border-left: 2px solid var(--gold); background: var(--stone);
+}
+.about-quote p {
+  font-family: var(--serif); font-style: italic; font-size: 1.05rem;
+  color: var(--ink); line-height: 1.5; margin: 0;
+}
+
+/* ─── SELECTED WORK ───────────────────────────────── */
+#work { background: var(--bg); }
+.work-intro { max-width: 38rem; margin-bottom: 4rem; }
+.work-intro p { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 0.8rem; }
+
+/* Tasting menu layout */
+.menu-list { display: flex; flex-direction: column; gap: 0; }
+.menu-divider { height: 1px; background: var(--border); }
+.menu-item {
+  display: grid; grid-template-columns: 3.5rem 1fr 1fr;
+  gap: 0 3rem; align-items: center;
+  padding: 2.2rem 0; cursor: default;
+  transition: all 0.3s;
+}
+.menu-item:hover { background: rgba(28,20,16,0.015); }
+.menu-item:hover .menu-photo img { filter: saturate(1); transform: scale(1.03); }
+.menu-n {
+  font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+  color: var(--gold); line-height: 1; text-align: right;
+}
+.menu-text { padding-right: 2rem; }
+.menu-dish {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 0.3rem; line-height: 1.2;
+}
+.menu-components {
+  font-size: 0.78rem; letter-spacing: 0.04em; color: var(--soft);
+  line-height: 1.5; margin-bottom: 0.8rem; font-style: italic;
+}
+.menu-note { font-size: 0.84rem; color: var(--mid); line-height: 1.75; }
+.menu-photo {
+  border-radius: 3px; overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 6px 10px 32px rgba(28,20,16,0.12);
+}
+.menu-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.88); transition: filter 0.4s, transform 0.5s ease;
+}
+
+/* ─── EXPERIENCE ──────────────────────────────────── */
+#experience { background: var(--white); }
+.exp-header { max-width: 36rem; margin-bottom: 4rem; }
+.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.exp-card {
+  padding: 2.2rem 2rem; border: 1px solid var(--border);
+  border-top: 2px solid var(--ink); background: var(--white);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.exp-card:hover { box-shadow: 0 12px 40px rgba(28,20,16,0.09); transform: translateY(-3px); }
+.exp-org {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.8rem; display: block;
+}
+.exp-role {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+  color: var(--ink); margin-bottom: 1rem; line-height: 1.2;
+}
+.exp-desc { font-size: 0.86rem; color: var(--mid); line-height: 1.78; }
+.exp-footer {
+  margin-top: 3rem; padding-top: 1.8rem; border-top: 1px solid var(--border);
+  font-family: var(--serif); font-style: italic; font-size: 0.9rem;
+  color: var(--soft); text-align: center;
+}
+
+/* ─── PERSPECTIVE ─────────────────────────────────── */
+#perspective { background: var(--stone); }
+.persp-header { max-width: 36rem; margin-bottom: 3.5rem; }
+.persp-header p { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 0.8rem; }
+.persp-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+}
+.persp-item {}
+.persp-photo {
+  border-radius: 3px; overflow: hidden; aspect-ratio: 3/4;
+}
+.persp-photo img {
+  width: 100%; height: 100%; object-fit: cover; filter: saturate(0.84);
+  transition: filter 0.4s, transform 0.5s ease; display: block;
+}
+.persp-item:hover .persp-photo img { filter: saturate(1); transform: scale(1.03); }
+.persp-cap {
+  padding: 0.65rem 0.1rem 0;
+  display: flex; flex-direction: column; gap: 0.1rem;
+}
+.pc-place { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+.pc-note { font-size: 0.76rem; color: var(--mid); line-height: 1.4; }
+
+/* ─── STRENGTHS ───────────────────────────────────── */
+#strengths { background: var(--bg); }
+.str-header { max-width: 36rem; margin-bottom: 3.5rem; }
+.str-cloud {
+  display: flex; flex-wrap: wrap; gap: 0.75rem; max-width: 780px;
+}
+.str-tag {
+  font-size: 0.8rem; color: var(--mid);
+  padding: 0.6rem 1.4rem; border-radius: 3rem;
+  border: 1px solid rgba(28,20,16,0.2); background: var(--white);
+  transition: all 0.2s; cursor: default;
+  letter-spacing: 0.02em;
+}
+.str-tag:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* ─── FUTURE ──────────────────────────────────────── */
+#future { background: var(--white); }
+.future-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; }
+.future-display {
+  font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400; font-style: italic; color: var(--ink);
+  line-height: 1.3; letter-spacing: -0.01em;
+}
+.future-display em { color: var(--gold); }
+.future-body p { font-size: 0.92rem; color: var(--mid); line-height: 1.9; margin-bottom: 1rem; }
+.future-note {
+  margin-top: 2rem; padding: 1.2rem 1.6rem;
+  border: 1px solid var(--border); background: var(--stone);
+  border-radius: 2px;
+}
+.future-note p {
+  font-size: 0.8rem; color: var(--soft); line-height: 1.7; margin: 0;
+}
+
+/* ─── CONTACT ─────────────────────────────────────── */
+#contact {
+  background: var(--ink); padding: 8rem 0 6rem; text-align: center;
+}
+.contact-lbl {
+  font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); opacity: 0.7; display: block; margin-bottom: 1.2rem;
+}
+.contact-h {
+  font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400; color: var(--white); line-height: 1.15; margin-bottom: 0.8rem;
+}
+.contact-h em { font-style: italic; color: var(--gold); }
+.contact-sub {
+  font-size: 0.88rem; color: rgba(253,250,246,0.45);
+  max-width: 28rem; margin: 0 auto 3rem; line-height: 1.8;
+}
+.contact-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.c-btn {
+  display: inline-block; padding: 0.85rem 2rem; border-radius: 3rem;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid rgba(253,250,246,0.18);
+  color: var(--white); transition: all 0.25s;
+}
+.c-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.c-btn.primary { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.c-btn.primary:hover { background: #C4A050; border-color: #C4A050; }
+.contact-loc {
+  margin-top: 3.5rem; font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(253,250,246,0.2);
+}
+
+/* ─── FOOTER ──────────────────────────────────────── */
+footer {
+  background: #120D09; padding: 1.2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 0.68rem; letter-spacing: 0.07em; color: rgba(253,250,246,0.18); }
+
+/* ─── FADE IN ─────────────────────────────────────── */
+.fi { opacity: 0; transform: translateY(20px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.fi.d1 { transition-delay: 0.1s; } .fi.d2 { transition-delay: 0.2s; }
+.fi.d3 { transition-delay: 0.3s; } .fi.d4 { transition-delay: 0.4s; }
+.fi.vis { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  nav { padding: 1rem 2rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  #hero { grid-template-columns: 1fr; padding: 7rem 2rem 5rem; gap: 3rem; text-align: center; }
+  .hero-label { justify-content: center; }
+  .hero-body { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .gallery-frame { max-width: 280px; margin: 0 auto; }
+  .w { padding: 0 2rem; }
+  .about-grid, .future-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .persp-grid { grid-template-columns: repeat(2, 1fr); }
+  .menu-item { grid-template-columns: 2.5rem 1fr; grid-template-rows: auto auto; gap: 1rem; }
+  .menu-photo { grid-column: 1 / -1; max-width: 100%; aspect-ratio: 16/9; }
+  footer { padding: 1rem 2rem; flex-direction: column; gap: 0.3rem; text-align: center; }
+}
+@media (max-width: 600px) {
+  .persp-grid { grid-template-columns: repeat(2, 1fr); }
+  .str-cloud { gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Jinny Cham</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#perspective">Perspective</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="sec" style="background:var(--bg);">
+  <div id="hero">
+    <div>
+      <div class="hero-label fi">Culinary Student</div>
+      <h1 class="hero-name fi d1">Jinny<em>Cham</em></h1>
+      <p class="hero-headline fi d2">Culinary Student with a Fine Dining Mindset</p>
+      <p class="hero-sub fi d2">Still early in my journey, but serious about where I am going.</p>
+      <p class="hero-body fi d3">I am building my path through real kitchen experience, discipline, and curiosity. I care deeply about standards, teamwork, and continuous growth. My goal is simple: to keep learning, keep improving, and earn my place in great kitchens.</p>
+      <div class="hero-actions fi d4">
+        <a href="#work" class="btn-ink">View My Work</a>
+        <a href="#experience" class="btn-line">My Journey</a>
+      </div>
+    </div>
+    <div class="hero-gallery-wrap fi d2">
+      <span class="gallery-eyebrow">The Datai Langkawi — Chef Series</span>
+      <div class="gallery-frame" id="heroGallery">
+        <div class="gslide active">
+          <img src="chefseries.jpg" alt="Re-Naa Chef Series, The Datai Langkawi" />
+          <div class="gcaption">Re-Naa, Norway · 3 Michelin Stars</div>
+        </div>
+        <div class="gslide">
+          <img src="img-chef-mathew.jpeg" alt="Chef Series, The Datai Langkawi" />
+          <div class="gcaption">Chef Series · The Datai Langkawi</div>
+        </div>
+        <div class="gslide">
+          <img src="img-evelyns.jpeg" alt="Evelyn's Table Chef Series" />
+          <div class="gcaption">Evelyn's Table, UK · 1 Michelin Star</div>
+        </div>
+      </div>
+      <div class="gdots" id="gdots">
+        <div class="gdot active" onclick="goSlide(0)"></div>
+        <div class="gdot" onclick="goSlide(1)"></div>
+        <div class="gdot" onclick="goSlide(2)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec sp">
+  <div class="w">
+    <div class="about-grid">
+      <div class="about-photo fi">
+        <img src="img-bread-making.jpeg" alt="Jinny at work in the kitchen" />
+        <div class="about-photo-foot">Universal Bakehouse, 2024</div>
+      </div>
+      <div class="fi d1">
+        <span class="lbl">About Me</span>
+        <h2 class="h2">About Me</h2>
+        <div class="rule"></div>
+        <div class="about-body">
+          <p>I chose culinary because I wanted to build something real with my hands, my discipline, and my energy. What began as interest has become genuine commitment.</p>
+          <p>I enjoy environments where standards are high, details matter, and every service demands focus. Pressure does not discourage me. It sharpens me. In fast-paced kitchens, I often feel more alive, more focused, and more determined to do things well.</p>
+          <p>I know I am still early in my career, but I take growth seriously. I actively look for opportunities that challenge me, teach me, and help me become stronger both technically and mentally.</p>
+        </div>
+        <div class="about-quote">
+          <p>I am not looking for comfort. I am looking for growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTED WORK -->
+<section id="work" class="sec sp">
+  <div class="w">
+    <div class="work-intro fi">
+      <span class="lbl">Selected Work</span>
+      <h2 class="h2">Selected Work</h2>
+      <div class="rule"></div>
+      <p>A few dishes and creations that reflect what I care about most: flavour, detail, balance, and presentation.</p>
+    </div>
+
+    <div class="menu-list">
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi">
+        <div class="menu-n">01</div>
+        <div class="menu-text">
+          <p class="menu-dish">Spotted Grouper</p>
+          <p class="menu-components">Asian spice glaze · coconut katsuobushi sauce · roe</p>
+          <p class="menu-note">Balancing the bold spice glaze with the delicacy of the fish required careful timing and restraint. Every element on the plate had a purpose.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-grouper.jpeg" alt="Spotted Grouper" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi d1">
+        <div class="menu-n">02</div>
+        <div class="menu-text">
+          <p class="menu-dish">Vanilla Cauliflower Velouté</p>
+          <p class="menu-components">Vadouvan foam · citrus · chestnut</p>
+          <p class="menu-note">A warm, composed dish built around subtle contrast — the sweetness of vanilla against spiced vadouvan, finished with bright citrus and earthy chestnut.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-potage.jpeg" alt="Vanilla Cauliflower Velouté" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi d2">
+        <div class="menu-n">03</div>
+        <div class="menu-text">
+          <p class="menu-dish">Oyster Aspic</p>
+          <p class="menu-components">Floral garnish · Sichuan pepper vinaigrette</p>
+          <p class="menu-note">A cold preparation where precision in setting, garnish placement, and seasoning were everything. The Sichuan pepper vinaigrette added a quiet, lingering heat.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-oyster.jpeg" alt="Oyster Aspic" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi">
+        <div class="menu-n">04</div>
+        <div class="menu-text">
+          <p class="menu-dish">Araguani Raspberry Éclair</p>
+          <p class="menu-components">Raspberry chantilly · Araguani dark chocolate · French meringue</p>
+          <p class="menu-note">Finding the right balance between raspberry's natural acidity and the depth of Araguani chocolate. The meringue introduced texture and a softer sweetness.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-eclair.jpeg" alt="Araguani Raspberry Éclair" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi d1">
+        <div class="menu-n">05</div>
+        <div class="menu-text">
+          <p class="menu-dish">Dulcey Citrus Tart</p>
+          <p class="menu-components">Dulcey chocolate mousse · citrus compote · pâte sucrée · jaconde base</p>
+          <p class="menu-note">Dulcey's caramel warmth needed to stay present without overwhelming the citrus. Getting the glaze level and the shard placement right took several attempts.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-tart.jpeg" alt="Dulcey Citrus Tart" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+      <div class="menu-item fi d2">
+        <div class="menu-n">06</div>
+        <div class="menu-text">
+          <p class="menu-dish">Shio Pan</p>
+          <p class="menu-components">Japanese salted bread · enriched dough · handmade from scratch</p>
+          <p class="menu-note">Simple on the surface. Everything underneath depends on how well you handle the dough, how you time the lamination, and how precisely you fold the butter.</p>
+        </div>
+        <div class="menu-photo">
+          <img src="img-bread-making.jpeg" alt="Shio Pan preparation" style="object-position: center 30%;" />
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec sp">
+  <div class="w">
+    <div class="exp-header fi">
+      <span class="lbl">Experience</span>
+      <h2 class="h2">Experience</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="exp-grid">
+
+      <div class="exp-card fi">
+        <span class="exp-org">The Datai Langkawi · 2026</span>
+        <p class="exp-role">Fine Dining Kitchen Internship</p>
+        <p class="exp-desc">Luxury hospitality kitchen experience where I learned the real meaning of standards, teamwork, timing, and consistency under pressure. Selected to assist international Michelin-starred guest chefs during the Chef Series programme.</p>
+      </div>
+
+      <div class="exp-card fi d1">
+        <span class="exp-org">Universal Bakehouse · 2024–2025</span>
+        <p class="exp-role">Pastry &amp; Baking Internship</p>
+        <p class="exp-desc">Hands-on bakery experience in a high-volume commercial environment. Daily work on dough handling, fermentation, shaping, and production rhythm. A discipline I carry into every kitchen I enter.</p>
+      </div>
+
+      <div class="exp-card fi d2">
+        <span class="exp-org">Sunway University · Le Cordon Bleu</span>
+        <p class="exp-role">Culinary Management Studies</p>
+        <p class="exp-desc">Formal training combining kitchen fundamentals with a wider understanding of hospitality and operations. Exchange at Burgundy School of Business, France. CGPA 3.50.</p>
+      </div>
+
+    </div>
+    <p class="exp-footer fi d3">Each environment taught me something different. Together, they shaped how I work today.</p>
+  </div>
+</section>
+
+<!-- PERSPECTIVE -->
+<section id="perspective" class="sec sp">
+  <div class="w">
+    <div class="persp-header fi">
+      <span class="lbl">Perspective &amp; Exposure</span>
+      <h2 class="h2">Perspective<br><em>&amp; Exposure</em></h2>
+      <div class="rule"></div>
+      <p>Places, ingredients, kitchens, and experiences that continue to shape my taste and curiosity.</p>
+    </div>
+
+    <div class="persp-grid fi d1">
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-amam2.jpeg" alt="Amam Dacotan, Tokyo" /></div>
+        <div class="persp-cap"><span class="pc-place">Tokyo, Japan</span><span class="pc-note">Amam Dacotan</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-poilane.jpeg" alt="Poilâne, Paris" /></div>
+        <div class="persp-cap"><span class="pc-place">Paris, France</span><span class="pc-note">Poilâne</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-croissant.jpeg" alt="La Panifacture, Paris" /></div>
+        <div class="persp-cap"><span class="pc-place">Paris, France</span><span class="pc-note">La Panifacture</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-macaron.jpeg" alt="Pierre Hermé macarons" /></div>
+        <div class="persp-cap"><span class="pc-place">Paris, France</span><span class="pc-note">Pierre Hermé</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-flan.jpeg" alt="Victor Hugo flan, Paris" /></div>
+        <div class="persp-cap"><span class="pc-place">Paris, France</span><span class="pc-note">Hugo &amp; Victor</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-renard-bun.jpeg" alt="Renard Bakery, Belgium" /></div>
+        <div class="persp-cap"><span class="pc-place">Belgium</span><span class="pc-note">Renard Bakery</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-pasta-florence.jpeg" alt="Pasta workshop, Florence" /></div>
+        <div class="persp-cap"><span class="pc-place">Florence, Italy</span><span class="pc-note">Fresh pasta workshop</span></div>
+      </div>
+
+      <div class="persp-item">
+        <div class="persp-photo"><img src="img-workshop.jpeg" alt="Home kitchen workshop" /></div>
+        <div class="persp-cap"><span class="pc-place">Kuala Lumpur</span><span class="pc-note">Home kitchen workshop</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section id="strengths" class="sec sp-sm">
+  <div class="w">
+    <div class="str-header fi">
+      <span class="lbl">What I Bring</span>
+      <h2 class="h2">What I Bring</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="str-cloud fi d1">
+      <span class="str-tag">Strong work ethic</span>
+      <span class="str-tag">Learns quickly</span>
+      <span class="str-tag">Composed under pressure</span>
+      <span class="str-tag">Detail-oriented</span>
+      <span class="str-tag">Positive energy</span>
+      <span class="str-tag">Hands-on mentality</span>
+      <span class="str-tag">Team player</span>
+      <span class="str-tag">High standards</span>
+      <span class="str-tag">Curious mindset</span>
+      <span class="str-tag">Serious about growth</span>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section id="future" class="sec sp">
+  <div class="w">
+    <div class="future-grid">
+      <div class="fi">
+        <span class="lbl">Ambition</span>
+        <div class="future-display">Where I Hope<br>to <em>Grow</em><br>Next</div>
+      </div>
+      <div class="fi d1">
+        <div class="future-body">
+          <p>I hope to continue learning in fine dining and hospitality environments where excellence is taken seriously. I value kitchens that challenge people, develop people, and care about craft.</p>
+          <p>Right now, I am focused on becoming useful, dependable, and better every day. Long term, I hope to build a career shaped by discipline, creativity, and meaningful guest experiences.</p>
+        </div>
+        <div class="future-note">
+          <p>Open to internships and opportunities in fine dining kitchens, pastry teams, and luxury hospitality environments. Comfortable with demanding environments — that is where I do my best work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="w" style="text-align:center;">
+    <span class="contact-lbl fi">Get in Touch</span>
+    <h2 class="contact-h fi d1">Let's <em>Connect</em></h2>
+    <p class="contact-sub fi d2">I am always open to learning opportunities, internships, and conversations with people who care deeply about the craft.</p>
+    <div class="contact-row fi d3">
+      <a href="mailto:jinnycham@gmail.com" class="c-btn primary">Email</a>
+      <a href="https://instagram.com/bite_mykitchen_" target="_blank" class="c-btn">Instagram</a>
+      <a href="https://linkedin.com/in/jinsyen-cham" target="_blank" class="c-btn">LinkedIn</a>
+      <a href="tel:+601642871717" class="c-btn">016-428 7171</a>
+      <a href="#" class="c-btn" download>Download CV</a>
+    </div>
+    <p class="contact-loc fi d4">Selangor, Malaysia</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Cham Jin Syen (Jinny Cham)</p>
+  <p>All rights reserved</p>
+</footer>
+
+<script>
+  // Gallery
+  let cur = 0;
+  const slides = document.querySelectorAll('.gslide');
+  const dots   = document.querySelectorAll('.gdot');
+  function goSlide(n) {
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active'); dots[cur].classList.add('active');
+  }
+  setInterval(() => goSlide((cur + 1) % slides.length), 5000);
+
+  // Fade-in
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fi').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('vis'); }
+    else { io.observe(el); }
+  });
+
+  // Nav compact
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    const s = window.scrollY > 60;
+    nav.style.padding = s ? '0.75rem 4rem' : '1.4rem 4rem';
+    nav.style.boxShadow = s ? '0 2px 24px rgba(28,20,16,0.07)' : 'none';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jinny Cham — Culinary Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --ivory:   #F1EBE1;
+  --white:   #FDFAF6;
+  --stone:   #E2D9CE;
+  --oat:     #D8CEBF;
+  --ink:     #0F0D0B;
+  --mid:     #52493F;
+  --soft:    #8C8278;
+  --gold:    #A8893A;
+  --border:  rgba(15,13,11,0.1);
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--ivory); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--gold); color: var(--white); }
+
+/* ─── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.3rem 3.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(241,235,225,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.4s, box-shadow 0.4s;
+}
+.nav-logo { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--ink); text-decoration: none; letter-spacing: 0.04em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { background: var(--ink) !important; color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 2rem; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--gold) !important; }
+
+/* ─── HERO ────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 5rem;
+  max-width: 1200px; margin: 0 auto;
+  padding: 9rem 3.5rem 6rem;
+}
+.hero-eyebrow {
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+.hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+.hero-name {
+  font-family: var(--serif); font-size: clamp(3.8rem, 7vw, 6.8rem);
+  font-weight: 400; line-height: 0.92; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 0.7rem;
+}
+.hero-name em { font-style: italic; color: var(--gold); display: block; }
+.hero-sub {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  color: var(--mid); margin-bottom: 0.8rem; font-weight: 300; line-height: 1.4;
+}
+.hero-desc { font-size: 0.88rem; color: var(--soft); max-width: 28rem; line-height: 1.85; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn-gold { background: var(--ink); color: var(--ivory); padding: 0.8rem 2rem; border-radius: 3rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--ink); transition: all 0.25s; }
+.btn-gold:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn-ghost-light { border: 1.5px solid rgba(15,13,11,0.25); color: var(--ink); padding: 0.8rem 2rem; border-radius: 3rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; }
+.btn-ghost-light:hover { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.btn-cv { border: 1.5px solid var(--border); color: var(--soft); padding: 0.8rem 1.4rem; border-radius: 3rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; }
+.btn-cv:hover { border-color: var(--gold); color: var(--gold); }
+/* Hero gallery */
+.hero-gallery-col { display: flex; flex-direction: column; gap: 0.9rem; }
+.gallery-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft); }
+.gallery-frame { position: relative; border-radius: 3px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 20px 28px 72px rgba(15,13,11,0.16); }
+.gslide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
+.gslide.active { opacity: 1; }
+.gslide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(0.87); }
+.gcaption { position: absolute; bottom: 0; left: 0; right: 0; padding: 3rem 1.5rem 1.2rem; background: linear-gradient(to top, rgba(15,13,11,0.7), transparent); font-family: var(--serif); font-style: italic; font-size: 0.82rem; color: rgba(253,250,246,0.85); line-height: 1.4; }
+.gdots { display: flex; gap: 0.5rem; }
+.gdot { height: 2px; width: 18px; background: var(--border); border-radius: 2px; cursor: pointer; transition: all 0.3s; }
+.gdot.active { background: var(--gold); width: 30px; }
+
+/* ─── SHARED ──────────────────────────────────────────── */
+.sec { position: relative; }
+.w { max-width: 1120px; margin: 0 auto; padding: 0 3.5rem; }
+.sp { padding: 8rem 0; }
+.sp-sm { padding: 6rem 0; }
+.lbl { font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+.h2 { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 400; color: var(--ink); line-height: 1.1; }
+.h2 em { font-style: italic; color: var(--gold); }
+.rule { width: 2rem; height: 1px; background: var(--gold); margin: 1.4rem 0; }
+
+/* fade-in */
+.fi { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fi.d1 { transition-delay: 0.1s; } .fi.d2 { transition-delay: 0.2s; }
+.fi.d3 { transition-delay: 0.3s; } .fi.d4 { transition-delay: 0.4s; }
+.fi.vis { opacity: 1; transform: none; }
+
+/* ─── ABOUT ───────────────────────────────────────────── */
+#about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 6rem; align-items: center; }
+.about-img { position: relative; border-radius: 2px; overflow: hidden; box-shadow: 14px 22px 64px rgba(15,13,11,0.15); }
+.about-img img { width: 100%; object-fit: cover; filter: saturate(0.86); display: block; }
+.about-img-cap {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 3rem 1.5rem 1.3rem;
+  background: linear-gradient(to top, rgba(15,13,11,0.65), transparent);
+  font-family: var(--serif); font-style: italic; font-size: 0.8rem;
+  color: rgba(253,250,246,0.82);
+}
+.about-body p { font-size: 0.93rem; color: var(--mid); line-height: 1.92; margin-bottom: 1.1rem; }
+.about-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+.chip { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--stone); color: var(--mid); padding: 0.4rem 1rem; border-radius: 2rem; border: 1px solid var(--border); }
+
+/* ─── WORK ────────────────────────────────────────────── */
+#work { background: var(--ivory); }
+.work-header { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 3.5rem; gap: 2rem; }
+.work-header p { font-size: 0.88rem; color: var(--mid); line-height: 1.8; max-width: 32rem; margin-top: 0.6rem; }
+.work-filters { display: flex; gap: 0.6rem; flex-wrap: wrap; align-self: flex-end; }
+.filt { padding: 0.5rem 1.3rem; border-radius: 2rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); color: var(--soft); background: transparent; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.filt.active, .filt:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.wcard { border-radius: 2px; overflow: hidden; cursor: default; background: var(--white); }
+.wcard-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; }
+.wcard-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.87) contrast(1.02); transition: filter 0.4s, transform 0.6s ease; }
+.wcard:hover .wcard-img img { filter: saturate(1); transform: scale(1.05); }
+.wcard-ph { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1.2rem; font-family: var(--serif); font-style: italic; font-size: 0.82rem; color: rgba(253,250,246,0.6); transition: transform 0.5s ease; }
+.wcard:hover .wcard-ph { transform: scale(1.05); }
+.ph-lamb   { background: linear-gradient(140deg,#6A3C1C,#B46A3A,#C89050); }
+.ph-steak  { background: linear-gradient(140deg,#2C1408,#6A2C0E,#A85828); }
+.ph-bread2 { background: linear-gradient(140deg,#7A6040,#B09060,#D8C090); }
+.ph-vien   { background: linear-gradient(140deg,#907020,#C0A030,#E8C850); }
+.ph-priv   { background: linear-gradient(140deg,#3A4E28,#6A7E48,#9CAE78); }
+.wcard-info { padding: 1.2rem 1.4rem 1.5rem; border-top: 1px solid var(--border); }
+.wcard-cat { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+.wcard-title { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); line-height: 1.25; margin-bottom: 0.4rem; }
+.wcard-note { font-size: 0.8rem; color: var(--soft); line-height: 1.65; }
+
+/* ─── EXPERIENCE ──────────────────────────────────────── */
+#experience { background: var(--white); }
+.exp-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; margin-bottom: 4rem; align-items: end; }
+.exp-intro { font-size: 0.9rem; color: var(--mid); line-height: 1.85; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.exp-card { padding: 2.2rem 2rem; border: 1px solid var(--border); background: var(--ivory); transition: transform 0.25s, box-shadow 0.25s; }
+.exp-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,13,11,0.09); }
+.exp-n { font-family: var(--serif); font-style: italic; font-size: 2.2rem; color: rgba(168,137,58,0.25); line-height: 1; margin-bottom: 1rem; display: block; }
+.exp-place { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; display: block; }
+.exp-role { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); margin-bottom: 0.8rem; line-height: 1.25; }
+.exp-desc { font-size: 0.84rem; color: var(--mid); line-height: 1.78; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+.etag { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; background: var(--stone); color: var(--mid); padding: 0.25rem 0.75rem; border-radius: 2rem; }
+
+/* ─── PERSPECTIVE ─────────────────────────────────────── */
+#perspective { background: var(--ink); }
+#perspective .lbl { color: var(--gold); opacity: 0.7; }
+#perspective .h2 { color: var(--white); }
+#perspective .rule { opacity: 0.4; }
+.persp-sub { font-size: 0.88rem; color: rgba(253,250,246,0.4); max-width: 32rem; line-height: 1.8; margin-bottom: 3.5rem; }
+.persp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+.persp-cell { }
+.persp-photo { border-radius: 2px; overflow: hidden; aspect-ratio: 3/4; }
+.persp-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.75) brightness(0.95); transition: filter 0.5s, transform 0.6s ease; display: block; }
+.persp-cell:hover .persp-photo img { filter: saturate(1) brightness(1); transform: scale(1.04); }
+.persp-cap { padding: 0.7rem 0 0; }
+.pc-loc { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.1rem; opacity: 0.8; }
+.pc-txt { font-size: 0.75rem; color: rgba(253,250,246,0.45); line-height: 1.4; }
+
+/* ─── BUILT FOR INTENSITY ─────────────────────────────── */
+#intensity { background: var(--ink); border-top: 1px solid rgba(168,137,58,0.2); }
+.intensity-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
+.intensity-head .h2 { color: var(--white); }
+.intensity-head .rule { opacity: 0.4; }
+.intensity-head p { font-size: 0.88rem; color: rgba(253,250,246,0.4); line-height: 1.8; margin-top: 1rem; }
+.intensity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.int-item { padding: 2rem 2rem; border: 1px solid rgba(253,250,246,0.06); }
+.int-item:hover { background: rgba(253,250,246,0.03); }
+.int-num { font-family: var(--serif); font-style: italic; font-size: 0.9rem; color: var(--gold); opacity: 0.6; display: block; margin-bottom: 0.5rem; }
+.int-stmt { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--white); line-height: 1.25; }
+
+/* ─── EDUCATION ───────────────────────────────────────── */
+#education { background: var(--stone); }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.edu-card { background: var(--white); padding: 2rem 1.8rem; border-top: 2px solid var(--gold); }
+.edu-inst { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; display: block; }
+.edu-deg { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); margin-bottom: 0.35rem; line-height: 1.3; }
+.edu-det { font-size: 0.8rem; color: var(--soft); }
+
+/* ─── CONTACT ─────────────────────────────────────────── */
+#contact { background: var(--ivory); padding: 8rem 0 6rem; text-align: center; }
+.contact-h { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-bottom: 0.8rem; }
+.contact-h em { font-style: italic; color: var(--gold); }
+.contact-sub { font-size: 0.88rem; color: var(--soft); max-width: 28rem; margin: 0 auto 3rem; line-height: 1.8; }
+.contact-row { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+.c-btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 3rem; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); color: var(--ink); transition: all 0.25s; }
+.c-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.c-btn.primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.c-btn.primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.contact-loc { margin-top: 3rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft); opacity: 0.5; }
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer { background: var(--ink); padding: 1.3rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+footer p { font-size: 0.65rem; letter-spacing: 0.07em; color: rgba(253,250,246,0.18); }
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  nav { padding: 1rem 2rem; }
+  nav.scrolled { padding: 0.7rem 2rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 8rem 2rem 4rem; }
+  .hero-left::after { display: none; }
+  .hero-right { height: 60vw; max-height: 480px; }
+  .w { padding: 0 2rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .work-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .exp-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .exp-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .persp-grid { grid-template-columns: repeat(2, 1fr); }
+  .intensity-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .edu-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 0.3rem; text-align: center; padding: 1rem 2rem; }
+}
+@media (max-width: 600px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .intensity-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Jinny Cham</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#perspective">Perspective</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="sec" style="background:var(--ivory);">
+  <div id="hero">
+    <div>
+      <div class="hero-eyebrow fi">Culinary Management · Fine Dining · Pastry</div>
+      <h1 class="hero-name fi d1">Jinny<em>Cham</em></h1>
+      <p class="hero-sub fi d2">Future culinary talent in fine dining, pastry &amp; artisan baking.</p>
+      <p class="hero-desc fi d3">Culinary management student with hands-on experience in luxury kitchens, artisan bakeries, pastry development, and international culinary environments.</p>
+      <div class="hero-actions fi d4">
+        <a href="#work" class="btn-gold">View Portfolio</a>
+        <a href="#contact" class="btn-ghost-light">Contact</a>
+        <a href="#" class="btn-cv" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-gallery-col fi d2">
+      <span class="gallery-label">Chef Series Highlights</span>
+      <div class="gallery-frame" id="heroGallery">
+        <div class="gslide active">
+          <img src="chefseries.jpg" alt="Chef Series with Re-Naa (3 Michelin Stars)" />
+          <div class="gcaption">Re-Naa, Norway · 3 Michelin Stars</div>
+        </div>
+        <div class="gslide">
+          <img src="img-chef-mathew.jpeg" alt="Chef Series with Mathew Leong" />
+          <div class="gcaption">Mathew Leong · The Datai Langkawi</div>
+        </div>
+        <div class="gslide">
+          <img src="img-evelyns.jpeg" alt="Chef Series with Evelyn's Table" />
+          <div class="gcaption">Evelyn's Table, UK · 1 Michelin Star</div>
+        </div>
+      </div>
+      <div class="gdots" id="gdots">
+        <div class="gdot active" onclick="goSlide(0)"></div>
+        <div class="gdot" onclick="goSlide(1)"></div>
+        <div class="gdot" onclick="goSlide(2)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec sp">
+  <div class="w">
+    <div class="about-grid">
+      <div class="about-img fi">
+        <img src="img-bread-making.jpeg" alt="Jinny shaping croissant dough" />
+        <div class="about-img-cap">Universal Bakehouse, 2024 — croissant shaping before egg wash</div>
+      </div>
+      <div class="fi d1">
+        <span class="lbl">My Story</span>
+        <h2 class="h2">A baker who<br><em>grew into kitchens</em></h2>
+        <div class="rule"></div>
+        <div class="about-body">
+          <p>Bread was where everything began. I started baking young, fascinated by how simple ingredients could become something warm, beautiful, and full of character.</p>
+          <p>Later, pastry taught me precision and discipline. Each tart, each éclair demanded a decision before I even picked up a spatula. Professional kitchens then pushed me further — through pressure, consistency, and the kind of teamwork that either shapes you or breaks you.</p>
+          <p>Today, I hope to keep learning in world-class culinary environments while building a strong foundation across fine dining, pastry, and bakery craft.</p>
+        </div>
+        <div class="about-chips">
+          <span class="chip">Artisan Baking</span>
+          <span class="chip">Pastry R&amp;D</span>
+          <span class="chip">Fine Dining</span>
+          <span class="chip">Fermentation</span>
+          <span class="chip">Viennoiserie</span>
+          <span class="chip">Food Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE WORK -->
+<section id="work" class="sec sp">
+  <div class="w">
+    <div class="work-header fi">
+      <div>
+        <span class="lbl">Portfolio</span>
+        <h2 class="h2">Signature Work</h2>
+        <p>Selected dishes and creations — flavour, detail, balance, and execution.</p>
+      </div>
+      <div class="work-filters">
+        <button class="filt active" onclick="filterWork('all',this)">All</button>
+        <button class="filt" onclick="filterWork('savory',this)">Savory</button>
+        <button class="filt" onclick="filterWork('pastry',this)">Pastry</button>
+        <button class="filt" onclick="filterWork('bread',this)">Bread</button>
+        <button class="filt" onclick="filterWork('private',this)">Private Dining</button>
+      </div>
+    </div>
+
+    <div class="work-grid fi d1" id="workGrid">
+
+      <!-- SAVORY -->
+      <div class="wcard" data-cat="savory">
+        <div class="wcard-img"><img src="img-grouper.jpeg" alt="Spotted Grouper" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Savory · The Datai Langkawi</p>
+          <p class="wcard-title">Wild Caught Spotted Grouper</p>
+          <p class="wcard-note">Asian spice glaze, light coconut katsuobushi sauce, mélange of roe. Balancing bold spice with the delicacy of the fish required precision and restraint.</p>
+        </div>
+      </div>
+
+      <div class="wcard" data-cat="savory">
+        <div class="wcard-img"><img src="img-potage.jpeg" alt="Vanilla Cauliflower Velouté" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Savory · The Datai Langkawi</p>
+          <p class="wcard-title">Hot Cold Potage of Vanilla Cauliflower</p>
+          <p class="wcard-note">Vadouvan foam, candied citrus, chestnut. Sweet vanilla against spiced vadouvan, finished with bright citrus and earthy chestnut.</p>
+        </div>
+      </div>
+
+      <div class="wcard" data-cat="savory">
+        <div class="wcard-img"><img src="img-oyster.jpeg" alt="Oyster Aspic" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Savory · The Datai Langkawi</p>
+          <p class="wcard-title">Oyster Jelly, Szechuan Peppercorn Vinaigrette</p>
+          <p class="wcard-note">Floral garnish, served on crushed ice. A cold preparation where precision in setting and seasoning was everything. The vinaigrette added a quiet, lingering heat.</p>
+        </div>
+      </div>
+
+      <!-- PASTRY -->
+      <div class="wcard" data-cat="pastry">
+        <div class="wcard-img"><img src="img-eclair.jpeg" alt="Raspberry Araguani Éclair" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Pastry</p>
+          <p class="wcard-title">Araguani Raspberry Éclair</p>
+          <p class="wcard-note">Raspberry chantilly, Araguani dark chocolate, French meringue. Finding balance between raspberry's acidity and the depth of Araguani chocolate.</p>
+        </div>
+      </div>
+
+      <div class="wcard" data-cat="pastry">
+        <div class="wcard-img"><img src="img-tart.jpeg" alt="Dulcey Citrus Tart" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Pastry</p>
+          <p class="wcard-title">Dulcey Citrus Tart</p>
+          <p class="wcard-note">Dulcey chocolate mousse, citrus compote, pâte sucrée, jaconde base. Caramel warmth held against bright citrus. Mirror glaze finish with tempered chocolate shards.</p>
+        </div>
+      </div>
+
+      <!-- BREAD -->
+      <div class="wcard" data-cat="bread">
+        <div class="wcard-img"><img src="img-bread2.jpeg" alt="Handcrafted bread" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Bread &amp; Viennoiserie</p>
+          <p class="wcard-title">Handcrafted Bread</p>
+          <p class="wcard-note">Home-baked loaves developed through fermentation study. Strong oven spring, open crumb. Bread was the beginning of understanding craft.</p>
+        </div>
+      </div>
+
+      <div class="wcard" data-cat="bread">
+        <div class="wcard-img"><img src="img-renard-bun.jpeg" alt="Renard Bakery Cardamom Bun" /></div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Bread &amp; Viennoiserie · Inspiration</p>
+          <p class="wcard-title">Cardamom Bun — Renard Bakery, Belgium</p>
+          <p class="wcard-note">Visited during the Belgium leg. The lamination, spice balance, and powdered sugar finish set a benchmark for enriched dough.</p>
+        </div>
+      </div>
+
+      <!-- PRIVATE DINING -->
+      <div class="wcard" data-cat="private">
+        <div class="wcard-img">
+          <div class="wcard-ph ph-priv">Private Dining Setup</div>
+        </div>
+        <div class="wcard-info">
+          <p class="wcard-cat">Private Dining</p>
+          <p class="wcard-title">Jinny's Tasting Table</p>
+          <p class="wcard-note">Home-based private dining project. Multi-course menus planned and executed solo — thinking like a chef-host, not just a cook.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec sp">
+  <div class="w">
+    <div class="exp-top fi">
+      <div>
+        <span class="lbl">Experience</span>
+        <h2 class="h2">A Fine Dining<br><em>Growth Path</em></h2>
+        <div class="rule"></div>
+      </div>
+      <p class="exp-intro fi d1">Each environment was chosen deliberately. Not for convenience — for the standard of work it demanded and the level of people around her.</p>
+    </div>
+    <div class="exp-grid">
+
+      <div class="exp-card fi">
+        <span class="exp-n">01</span>
+        <span class="exp-place">The Datai Langkawi · Jan–Apr 2026</span>
+        <p class="exp-role">Fine Dining Kitchen Internship</p>
+        <p class="exp-desc">Luxury resort fine dining — rotating across hot and cold kitchens. Selected to support the international Chef Series, assisting guest chefs from Evelyn's Table (1★ UK) and Re-Naa (3★ Norway) in multi-course execution. Learned what consistency under genuine pressure actually means.</p>
+        <div class="exp-tags">
+          <span class="etag">Fine Dining</span>
+          <span class="etag">Michelin Chef Series</span>
+          <span class="etag">Service Coordination</span>
+          <span class="etag">Hot &amp; Cold Kitchen</span>
+        </div>
+      </div>
+
+      <div class="exp-card fi d1">
+        <span class="exp-n">02</span>
+        <span class="exp-place">Universal Bakehouse · Aug 2024–Jan 2025</span>
+        <p class="exp-role">Pastry &amp; Baking Internship</p>
+        <p class="exp-desc">High-volume commercial bakery generating ~RM250K monthly. Daily work across bread, viennoiserie, and pastry stations. Built real technical foundation: fermentation control, dough handling, lamination, and production discipline. The craft behind every plate starts here.</p>
+        <div class="exp-tags">
+          <span class="etag">Sourdough</span>
+          <span class="etag">Viennoiserie</span>
+          <span class="etag">Fermentation</span>
+          <span class="etag">Production</span>
+        </div>
+      </div>
+
+      <div class="exp-card fi d2">
+        <span class="exp-n">03</span>
+        <span class="exp-place">Sunway University · Le Cordon Bleu · 2023–present</span>
+        <p class="exp-role">Culinary Management Studies</p>
+        <p class="exp-desc">BSc Culinary Management (CGPA 3.50) combining kitchen fundamentals with hospitality operations. Diploma in Culinary Arts — Le Cordon Bleu certified. Exchange at Burgundy School of Business, France (16.13/20). Young Chef Full Scholarship recipient. Dean's List.</p>
+        <div class="exp-tags">
+          <span class="etag">Le Cordon Bleu</span>
+          <span class="etag">Burgundy Exchange</span>
+          <span class="etag">Young Chef Scholar</span>
+          <span class="etag">Dean's List</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL PERSPECTIVE -->
+<section id="perspective" class="sec sp">
+  <div class="w">
+    <div class="persp-header fi" style="margin-bottom:3.5rem;">
+      <span class="lbl">Global Culinary Perspective</span>
+      <h2 class="h2">Global Culinary<br><em>Perspective</em></h2>
+      <div class="rule" style="background:rgba(168,137,58,0.5);"></div>
+      <p class="persp-sub">Places, kitchens, and ingredients that continue to shape how Jinny thinks about food, standards, and the world of hospitality.</p>
+    </div>
+    <div class="persp-grid fi d1">
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-amam2.jpeg" alt="Amam Dacotan, Tokyo" /></div>
+        <div class="persp-cap"><span class="pc-loc">Tokyo, Japan</span><span class="pc-txt">Amam Dacotan — where Japanese precision meets European bread</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-pain2.jpeg" alt="Pain des Philosophes, Tokyo" /></div>
+        <div class="persp-cap"><span class="pc-loc">Tokyo, Japan</span><span class="pc-txt">Pain des Philosophes — French tradition interpreted by Japanese hands</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-cedric.jpeg" alt="Salon du Chocolat, Paris" /></div>
+        <div class="persp-cap"><span class="pc-loc">Paris, France</span><span class="pc-txt">Salon du Chocolat — Cédric Grolet in person</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-macaron.jpeg" alt="Pierre Hermé, Paris" /></div>
+        <div class="persp-cap"><span class="pc-loc">Paris, France</span><span class="pc-txt">Pierre Hermé — studying what mastery at scale looks like</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-annecy.jpeg" alt="Morning market, Annecy" /></div>
+        <div class="persp-cap"><span class="pc-loc">Annecy, France</span><span class="pc-txt">Morning market — cheese, charcuterie, Alpine produce</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-wine-factory.jpeg" alt="Wine cellar, Burgundy" /></div>
+        <div class="persp-cap"><span class="pc-loc">Burgundy, France</span><span class="pc-txt">Wine and spirits cellar — terroir understood through the senses</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-pasta-florence.jpeg" alt="Pasta workshop, Florence" /></div>
+        <div class="persp-cap"><span class="pc-loc">Florence, Italy</span><span class="pc-txt">Fresh pasta workshop — flour, egg, patience, repetition</span></div>
+      </div>
+
+      <div class="persp-cell">
+        <div class="persp-photo"><img src="img-dijon.jpeg" alt="Moutarderie Fallot, Beaune" /></div>
+        <div class="persp-cap"><span class="pc-loc">Beaune, France</span><span class="pc-txt">La Moutarderie Fallot — Dijon mustard stone-ground since 1840</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BUILT FOR INTENSITY -->
+<section id="intensity" class="sec sp">
+  <div class="w">
+    <div class="intensity-inner">
+      <div class="intensity-head fi">
+        <span class="lbl" style="color:rgba(168,137,58,0.7);">Mindset</span>
+        <h2 class="h2 fi" style="color:var(--white);">Built for<br><em>Intensity</em></h2>
+        <div class="rule fi" style="opacity:0.4;"></div>
+        <p>The qualities that define how Jinny works, not just what she makes.</p>
+      </div>
+      <div class="intensity-grid fi d1">
+        <div class="int-item">
+          <span class="int-num">01</span>
+          <p class="int-stmt">Calm in pressure</p>
+        </div>
+        <div class="int-item">
+          <span class="int-num">02</span>
+          <p class="int-stmt">Energised by service</p>
+        </div>
+        <div class="int-item">
+          <span class="int-num">03</span>
+          <p class="int-stmt">Obsessed with improvement</p>
+        </div>
+        <div class="int-item">
+          <span class="int-num">04</span>
+          <p class="int-stmt">Learns fast under strong standards</p>
+        </div>
+        <div class="int-item">
+          <span class="int-num">05</span>
+          <p class="int-stmt">Serious about craft</p>
+        </div>
+        <div class="int-item">
+          <span class="int-num">06</span>
+          <p class="int-stmt">Team player in demanding kitchens</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="w" style="text-align:center;">
+    <span class="lbl fi" style="justify-content:center;display:block;margin-bottom:1.2rem;">Get in Touch</span>
+    <h2 class="contact-h fi d1">Let's <em>Connect</em></h2>
+    <p class="contact-sub fi d2">Open to fine dining internships, pastry opportunities, and conversations with people who take craft seriously.</p>
+    <div class="contact-row fi d3">
+      <a href="mailto:jinnycham@gmail.com" class="c-btn primary">jinnycham@gmail.com</a>
+      <a href="https://instagram.com/bite_mykitchen_" target="_blank" class="c-btn">Instagram</a>
+      <a href="https://linkedin.com/in/jinsyen-cham" target="_blank" class="c-btn">LinkedIn</a>
+      <a href="tel:+601642871717" class="c-btn">016-428 7171</a>
+      <a href="#" class="c-btn" download>Download CV</a>
+    </div>
+    <p class="contact-loc fi d4">Selangor, Malaysia</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Cham Jin Syen (Jinny Cham)</p>
+  <p>All rights reserved</p>
+</footer>
+
+<script>
+  // Nav compact on scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '0.75rem 3.5rem' : '1.3rem 3.5rem';
+    nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(15,13,11,0.07)' : 'none';
+  });
+
+  // Fade-in observer
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fi').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('vis');
+    else io.observe(el);
+  });
+
+  // Work filter
+  function filterWork(cat, btn) {
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.wcard').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+      if (show) {
+        card.style.opacity = '0'; card.style.transform = 'translateY(12px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s, transform 0.4s';
+          card.style.opacity = '1'; card.style.transform = 'none';
+        }, 20);
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

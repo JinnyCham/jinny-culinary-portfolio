@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jinny Cham — Culinary Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream:   #F7F2EB;
+  --stone:   #EDE5D8;
+  --oat:     #E5DAC8;
+  --caramel: #C4A05A;
+  --gold:    #B8924A;
+  --apricot: #C97B4E;
+  --sage:    #7A8E6C;
+  --cocoa:   #2E1F13;
+  --warm:    #6B5240;
+  --text:    #2A1A0E;
+  --soft:    #6B5240;
+  --border:  rgba(44,31,19,0.1);
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--cream); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+::selection { background: var(--caramel); color: var(--cream); }
+img { display: block; max-width: 100%; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(247,242,235,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+.nav-logo { font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--cocoa); text-decoration: none; letter-spacing: 0.02em; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--cocoa); }
+.nav-pill { background: var(--cocoa); color: var(--cream) !important; padding: 0.45rem 1.2rem; border-radius: 2rem; transition: background 0.2s !important; }
+.nav-pill:hover { background: var(--apricot) !important; }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 5rem;
+  padding: 8rem 3rem 5rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--apricot);
+  margin-bottom: 1.4rem;
+}
+.hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--apricot); }
+.hero-name {
+  font-family: var(--serif); font-size: clamp(3.8rem, 7vw, 6.8rem);
+  font-weight: 400; line-height: 0.92; color: var(--cocoa);
+  letter-spacing: -0.02em; margin-bottom: 0.6rem;
+}
+.hero-name em { font-style: italic; color: var(--caramel); display: block; }
+.hero-sub {
+  font-family: var(--serif); font-style: italic; font-size: clamp(1rem, 1.8vw, 1.35rem);
+  color: var(--soft); margin-bottom: 1.2rem; line-height: 1.45; font-weight: 300;
+}
+.hero-desc { font-size: 0.88rem; color: var(--soft); max-width: 28rem; line-height: 1.85; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn-dark { background: var(--cocoa); color: var(--cream); padding: 0.75rem 1.8rem; border-radius: 3rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--cocoa); transition: all 0.25s; }
+.btn-dark:hover { background: var(--apricot); border-color: var(--apricot); }
+.btn-outline { border: 1.5px solid rgba(44,31,19,0.35); color: var(--cocoa); padding: 0.75rem 1.8rem; border-radius: 3rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; }
+.btn-outline:hover { background: var(--cocoa); color: var(--cream); border-color: var(--cocoa); }
+.btn-ghost { border: 1.5px solid var(--border); color: var(--soft); padding: 0.75rem 1.4rem; border-radius: 3rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; }
+.btn-ghost:hover { border-color: var(--caramel); color: var(--caramel); }
+
+/* Hero gallery */
+.hero-gallery-col { display: flex; flex-direction: column; gap: 0.8rem; }
+.gallery-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft); margin-bottom: 0.2rem; }
+.gallery-frame {
+  position: relative; border-radius: 4px; overflow: hidden;
+  box-shadow: 16px 24px 64px rgba(44,31,19,0.18);
+  aspect-ratio: 3/4; width: 100%;
+}
+.gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+.gallery-slide.active { opacity: 1; }
+.gallery-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(0.88); }
+.gallery-slide-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.5rem 1.5rem 1.2rem;
+  background: linear-gradient(to top, rgba(44,31,19,0.7) 0%, transparent 100%);
+  font-family: var(--serif); font-style: italic; font-size: 0.85rem;
+  color: rgba(247,242,235,0.88); line-height: 1.4;
+}
+.gallery-dots { display: flex; gap: 0.5rem; }
+.dot { width: 20px; height: 2px; background: var(--border); cursor: pointer; transition: all 0.3s; border-radius: 2px; }
+.dot.active { background: var(--caramel); width: 32px; }
+
+/* SECTION SHELL */
+section { position: relative; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+.section-pad { padding: 6rem 0; }
+.label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--apricot); display: block; margin-bottom: 0.5rem; }
+.h2 { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 400; color: var(--cocoa); line-height: 1.15; }
+.h2 em { font-style: italic; color: var(--caramel); }
+.rule { width: 2.5rem; height: 1px; background: var(--caramel); margin: 1.4rem 0; }
+
+/* ABOUT */
+#about { background: #FEFCF8; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: center; }
+.about-img-wrap { position: relative; }
+.about-img-wrap img { width: 100%; border-radius: 4px; object-fit: cover; filter: saturate(0.88); box-shadow: 10px 18px 52px rgba(44,31,19,0.14); }
+.about-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.5rem 1.2rem;
+  background: linear-gradient(to top, rgba(44,31,19,0.55), transparent);
+  font-family: var(--serif); font-style: italic; font-size: 0.82rem;
+  color: rgba(247,242,235,0.85);
+}
+.about-text p { font-size: 0.95rem; color: var(--soft); line-height: 1.85; margin-bottom: 1rem; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+.chip { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--stone); color: var(--warm); padding: 0.4rem 1rem; border-radius: 2rem; border: 1px solid var(--border); }
+
+/* EXPERIENCE */
+#experience { background: var(--cream); }
+.exp-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; align-items: end; }
+.exp-intro-desc { font-size: 0.92rem; color: var(--soft); line-height: 1.8; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+
+.timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 6.5rem; top: 1rem; bottom: 1rem; width: 1px; background: linear-gradient(to bottom, transparent, var(--caramel) 8%, var(--caramel) 92%, transparent); }
+.tl-item { display: grid; grid-template-columns: 6.5rem 1px 1fr; gap: 0 2.5rem; padding: 2rem 0; transition: all 0.2s; }
+.tl-item:hover .tl-card { transform: translateX(3px); }
+.tl-date { text-align: right; }
+.tl-date .yr { font-family: var(--serif); font-style: italic; font-size: 0.82rem; color: var(--caramel); display: block; line-height: 1.4; }
+.tl-dot { position: relative; display: flex; justify-content: center; padding-top: 0.3rem; }
+.tl-dot::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #FEFCF8; border: 2px solid var(--caramel); position: absolute; left: -4px; top: 0.3rem; transition: background 0.2s; }
+.tl-item:hover .tl-dot::before { background: var(--caramel); }
+.tl-card { background: #FEFCF8; border: 1px solid var(--border); border-radius: 6px; padding: 1.6rem 1.8rem; transition: transform 0.2s; box-shadow: 0 2px 12px rgba(44,31,19,0.04); }
+.tl-role { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; color: var(--cocoa); margin-bottom: 0.15rem; }
+.tl-org { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--apricot); margin-bottom: 0.9rem; }
+.tl-desc { font-size: 0.87rem; color: var(--soft); line-height: 1.78; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.tag { font-size: 0.65rem; letter-spacing: 0.07em; text-transform: uppercase; background: var(--stone); color: var(--warm); padding: 0.25rem 0.75rem; border-radius: 2rem; }
+
+/* SIGNATURE WORK */
+#work { background: var(--cocoa); }
+#work .label { color: var(--caramel); }
+#work .h2 { color: var(--cream); }
+#work .rule { opacity: 0.4; }
+.work-desc { font-size: 0.88rem; color: rgba(247,242,235,0.55); line-height: 1.8; max-width: 34rem; margin-bottom: 2.5rem; }
+.work-filters { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filt { padding: 0.45rem 1.2rem; border-radius: 2rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(247,242,235,0.18); color: rgba(247,242,235,0.5); background: transparent; cursor: pointer; transition: all 0.2s; }
+.filt.active, .filt:hover { background: var(--caramel); border-color: var(--caramel); color: var(--cocoa); }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.work-card { border-radius: 4px; overflow: hidden; cursor: pointer; }
+.work-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; }
+.work-ph { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1rem 1.2rem; font-family: var(--serif); font-size: 0.8rem; font-style: italic; color: rgba(255,255,255,0.65); transition: transform 0.5s ease; }
+.work-card:hover .work-ph { transform: scale(1.05); }
+.ph-lamb   { background: linear-gradient(135deg, #7A4E2A 0%, #C4805A 50%, #D4A870 100%); }
+.ph-steak  { background: linear-gradient(135deg, #3C2212 0%, #7A3C12 50%, #B86830 100%); }
+.ph-salmon { background: linear-gradient(135deg, #C47A50 0%, #DCAA80 60%, #F0CC90 100%); }
+.ph-eclair { background: linear-gradient(135deg, #C090A8 0%, #E8C8D8 50%, #FCE8F0 100%); }
+.ph-tart   { background: linear-gradient(135deg, #C0A060 0%, #E0C890 50%, #FFF4D0 100%); }
+.ph-bun    { background: linear-gradient(140deg, #8A6840 0%, #C4A070 50%, #E8D0A8 100%); }
+.ph-sour   { background: linear-gradient(135deg, #7A6050 0%, #B89870 50%, #D8C0A0 100%); }
+.ph-vien   { background: linear-gradient(135deg, #A07828 0%, #C8A040 50%, #E8C860 100%); }
+.ph-priv   { background: linear-gradient(135deg, #4A5E30 0%, #7A8E50 50%, #B0C080 100%); }
+.work-info { padding: 1.1rem 1.3rem 1.4rem; background: rgba(247,242,235,0.05); border-top: 1px solid rgba(247,242,235,0.08); }
+.wi-cat { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--caramel); margin-bottom: 0.25rem; }
+.wi-title { font-family: var(--serif); font-size: 1.05rem; color: var(--cream); line-height: 1.3; margin-bottom: 0.4rem; }
+.wi-note { font-size: 0.78rem; color: rgba(247,242,235,0.45); line-height: 1.6; }
+
+/* GLOBAL CULINARY PERSPECTIVE */
+#global { background: var(--cream); }
+.global-intro { max-width: 40rem; margin-bottom: 3rem; }
+.global-sub { font-size: 0.88rem; color: var(--soft); line-height: 1.75; margin-top: 0.5rem; }
+.global-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.global-card { position: relative; border-radius: 4px; overflow: hidden; cursor: default; }
+.global-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: saturate(0.85); transition: filter 0.4s, transform 0.5s ease; display: block; }
+.global-card:hover img { filter: saturate(1); transform: scale(1.03); }
+.global-caption {
+  padding: 0.9rem 0.1rem 0;
+}
+.cap-place { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--apricot); display: block; margin-bottom: 0.2rem; }
+.cap-note { font-size: 0.8rem; color: var(--soft); line-height: 1.5; }
+
+/* WHY ME */
+#whyme { background: var(--stone); }
+.whyme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.why-card { background: #FEFCF8; border: 1px solid var(--border); border-radius: 6px; padding: 2rem 1.8rem; transition: transform 0.2s, box-shadow 0.2s; }
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(44,31,19,0.1); }
+.why-num { font-family: var(--serif); font-size: 1.8rem; font-style: italic; color: var(--caramel); margin-bottom: 1rem; display: block; line-height: 1; }
+.why-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--cocoa); margin-bottom: 0.6rem; line-height: 1.3; }
+.why-desc { font-size: 0.82rem; color: var(--soft); line-height: 1.7; }
+
+/* EDUCATION */
+#education { background: #FEFCF8; }
+.edu-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.edu-card { padding: 1.5rem 1.8rem; border-left: 2px solid var(--caramel); background: var(--cream); border-radius: 0 6px 6px 0; }
+.edu-deg { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--cocoa); margin-bottom: 0.2rem; }
+.edu-inst { font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--apricot); margin-bottom: 0.35rem; }
+.edu-detail { font-size: 0.82rem; color: var(--soft); }
+.honors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.honor { background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 1.8rem; }
+.honor-n { font-family: var(--serif); font-size: 1.5rem; font-style: italic; color: var(--caramel); display: block; margin-bottom: 0.6rem; line-height: 1; }
+.honor-t { font-family: var(--serif); font-size: 1rem; color: var(--cocoa); margin-bottom: 0.3rem; }
+.honor-s { font-size: 0.78rem; color: var(--soft); line-height: 1.5; }
+.skills-row { grid-column: 1 / -1; padding-top: 2.5rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+.skills-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+.skill { background: var(--stone); color: var(--cocoa); padding: 0.5rem 1.2rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid var(--border); transition: all 0.2s; cursor: default; }
+.skill:hover { background: var(--cocoa); color: var(--cream); border-color: var(--cocoa); }
+
+/* FUTURE DIRECTION */
+#future { background: var(--oat); }
+.future-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.future-quote {
+  font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300; font-style: italic; color: var(--cocoa);
+  line-height: 1.35; letter-spacing: -0.01em;
+}
+.future-quote em { color: var(--caramel); font-style: italic; }
+.future-text { font-size: 0.92rem; color: var(--soft); line-height: 1.85; }
+
+/* CONTACT */
+#contact { background: var(--cocoa); padding: 6rem 0 5rem; text-align: center; }
+.contact-eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--caramel); opacity: 0.7; display: block; margin-bottom: 1rem; }
+.contact-headline {
+  font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 400; color: var(--cream); line-height: 1.2; margin-bottom: 0.8rem;
+}
+.contact-headline em { font-style: italic; color: var(--caramel); }
+.contact-sub { font-size: 0.9rem; color: rgba(247,242,235,0.45); max-width: 28rem; margin: 0 auto 3rem; line-height: 1.75; }
+.contact-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.c-link { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 3rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(247,242,235,0.18); color: var(--cream); transition: all 0.25s; }
+.c-link:hover { background: var(--caramel); border-color: var(--caramel); color: var(--cocoa); }
+.c-link.primary { background: var(--caramel); border-color: var(--caramel); color: var(--cocoa); }
+.c-link.primary:hover { background: var(--apricot); border-color: var(--apricot); color: #fff; }
+.contact-loc { margin-top: 3rem; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247,242,235,0.25); }
+
+/* FOOTER */
+footer { background: #1C100A; padding: 1.25rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+footer p { font-size: 0.7rem; letter-spacing: 0.07em; color: rgba(247,242,235,0.2); }
+
+/* FADE IN */
+.fi { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fi.d1 { transition-delay: 0.1s; }
+.fi.d2 { transition-delay: 0.2s; }
+.fi.d3 { transition-delay: 0.3s; }
+.fi.d4 { transition-delay: 0.4s; }
+.fi.vis { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; text-align: center; }
+  .hero-eyebrow { margin: 0 auto 1.4rem; }
+  .hero-desc { margin: 0 auto 2rem; }
+  .hero-actions { justify-content: center; }
+  .gallery-frame { max-width: 300px; margin: 0 auto; }
+  .wrap { padding: 0 1.5rem; }
+  .about-grid, .future-inner, .edu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-intro-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .whyme-grid { grid-template-columns: 1fr 1fr; }
+  .global-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .honors-grid { grid-template-columns: 1fr 1fr; }
+  .timeline::before { left: 0; }
+  .tl-item { grid-template-columns: 0 1px 1fr; gap: 0 1.5rem; }
+  .tl-date { display: none; }
+}
+
+@media (max-width: 540px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .whyme-grid { grid-template-columns: 1fr; }
+  .masonry { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Jinny Cham</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#global">Global</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-pill">Say Hello</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="background:var(--cream);">
+  <section id="hero">
+    <div class="hero-left">
+      <span class="hero-eyebrow fi">Culinary Management · Fine Dining · Pastry</span>
+      <h1 class="hero-name fi d1">Jinny<em>Cham</em></h1>
+      <p class="hero-sub fi d2">Future culinary talent in fine dining, pastry &amp; artisan baking.</p>
+      <p class="hero-desc fi d3">Culinary management student with hands-on experience in luxury kitchens, artisan bakeries, pastry development, and international culinary environments.</p>
+      <div class="hero-actions fi d4">
+        <a href="#work" class="btn-dark">View Portfolio</a>
+        <a href="#contact" class="btn-outline">Contact</a>
+        <a href="#" class="btn-ghost" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-gallery-col fi d2">
+      <span class="gallery-label">Chef Series Highlights</span>
+      <div class="gallery-frame" id="heroGallery">
+        <div class="gallery-slide active">
+          <img src="chefseries.jpg" alt="Chef Series with Re-Naa (3 Michelin Stars)" />
+          <div class="gallery-slide-caption">Re-Naa, Norway · 3 Michelin Stars</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="img-chef-mathew.jpeg" alt="Chef Series with Mathew Leong" />
+          <div class="gallery-slide-caption">Mathew Leong · The Datai Langkawi</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="img-evelyns.jpeg" alt="Chef Series with Evelyn's Table" />
+          <div class="gallery-slide-caption">Evelyn's Table, UK · 1 Michelin Star</div>
+        </div>
+      </div>
+      <div class="gallery-dots" id="heroDots">
+        <div class="dot active" onclick="goSlide(0)"></div>
+        <div class="dot" onclick="goSlide(1)"></div>
+        <div class="dot" onclick="goSlide(2)"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap section-pad">
+    <div class="about-grid">
+      <div class="about-img-wrap fi">
+        <img src="img-bread-making.jpeg" alt="Jinny shaping croissant dough" />
+        <div class="about-img-caption">Universal Bakehouse, 2024 — croissant shaping before egg wash</div>
+      </div>
+      <div class="fi d1">
+        <span class="label">My Story</span>
+        <h2 class="h2">A baker who<br><em>grew into kitchens</em></h2>
+        <div class="rule"></div>
+        <div class="about-text">
+          <p>Bread was where everything began. I started baking young, fascinated by how simple ingredients could become something warm, beautiful, and full of character.</p>
+          <p>Later, pastry taught me precision and discipline. Each tart, each éclair demanded a decision before I even picked up a spatula. Professional kitchens then pushed me further — through pressure, consistency, and the kind of teamwork that either shapes you or breaks you.</p>
+          <p>Today, I hope to keep learning in world-class culinary environments while building a strong foundation across fine dining, pastry, and bakery craft.</p>
+        </div>
+        <div class="about-chips">
+          <span class="chip">Artisan Baking</span>
+          <span class="chip">Pastry R&amp;D</span>
+          <span class="chip">Fine Dining</span>
+          <span class="chip">Fermentation</span>
+          <span class="chip">Viennoiserie</span>
+          <span class="chip">Food Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap section-pad">
+    <div class="exp-intro-grid fi">
+      <div>
+        <span class="label">Journey</span>
+        <h2 class="h2">A progression<br>of <em>craft</em></h2>
+        <div class="rule"></div>
+      </div>
+      <p class="exp-intro-desc fi d1">From a home kitchen baking first loaves, to a production bakehouse, to fine dining kitchens alongside Michelin-starred guest chefs — each chapter built something essential.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item fi">
+        <div class="tl-date"><span class="yr">Jan – Apr<br>2026</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <p class="tl-role">Fine Dining Kitchen Management Intern</p>
+          <p class="tl-org">The Datai Langkawi, Malaysia</p>
+          <p class="tl-desc">Rotated across hot and cold kitchens in a luxury resort fine dining environment, coordinating prep and plating during live service. <strong>Selected for the international Chef Series</strong> — assisting guest chefs from Evelyn's Table (1 Michelin Star, UK) and Re-Naa (3 Michelin Stars, Norway) in multi-course menu execution.</p>
+          <div class="tl-tags">
+            <span class="tag">Fine Dining</span><span class="tag">Michelin Chef Series</span><span class="tag">Plating</span><span class="tag">Service Coordination</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fi d1">
+        <div class="tl-date"><span class="yr">Aug 2024 –<br>Jan 2025</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <p class="tl-role">Pastry &amp; Baking Intern</p>
+          <p class="tl-org">Universal Bakehouse, Malaysia</p>
+          <p class="tl-desc">Daily production of sourdough and pastries in a high-volume commercial bakery. Rotated across bread, viennoiserie, and pastry stations — building real fluency in mixing, fermentation, gluten development, and shaping at speed.</p>
+          <div class="tl-tags">
+            <span class="tag">Sourdough</span><span class="tag">Viennoiserie</span><span class="tag">Fermentation</span><span class="tag">Production Workflow</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fi d2">
+        <div class="tl-date"><span class="yr">Oct 2023 –<br>Jan 2024</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <p class="tl-role">Culinary Assistant</p>
+          <p class="tl-org">International Culinary Olympics Malaysia Team</p>
+          <p class="tl-desc">Supported preparation, service execution, and kitchen coordination during training and competition runs. Managed timekeeping and ingredient logistics under competitive conditions.</p>
+          <div class="tl-tags">
+            <span class="tag">Competition Kitchen</span><span class="tag">Prep &amp; Service</span><span class="tag">Teamwork</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fi d3">
+        <div class="tl-date"><span class="yr">Dec 2022 –<br>Present</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <p class="tl-role">Culinary Content Creator</p>
+          <p class="tl-org">@bite_mykitchen_ · Jinny 的发酵笔记</p>
+          <p class="tl-desc">Built food content around bread and baking — R&amp;D recipe testing, product styling, and video production. Generated <strong>60,000+ organic views</strong>, with multiple videos exceeding 10K views each. Communicating food clearly is its own craft.</p>
+          <div class="tl-tags">
+            <span class="tag">Content Creation</span><span class="tag">Recipe R&amp;D</span><span class="tag">Food Styling</span><span class="tag">Video Production</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE WORK -->
+<section id="work">
+  <div class="wrap section-pad">
+    <span class="label fi">Portfolio</span>
+    <h2 class="h2 fi d1">Signature <em>Work</em></h2>
+    <div class="rule fi d1"></div>
+    <p class="work-desc fi d2">A curated selection of dishes, pastries, and projects — each one a small story about what I was learning or trying to understand.</p>
+
+    <div class="work-filters fi d3">
+      <button class="filt active" onclick="filterWork('all',this)">All</button>
+      <button class="filt" onclick="filterWork('dining',this)">Fine Dining</button>
+      <button class="filt" onclick="filterWork('pastry',this)">Pastry</button>
+      <button class="filt" onclick="filterWork('bread',this)">Bread &amp; Viennoiserie</button>
+      <button class="filt" onclick="filterWork('private',this)">Private Dining</button>
+    </div>
+
+    <div class="work-grid fi d4" id="workGrid">
+      <div class="work-card" data-cat="dining">
+        <div class="work-img"><div class="work-ph ph-lamb">Roasted Lamb Rack</div></div>
+        <div class="work-info"><p class="wi-cat">Fine Dining</p><p class="wi-title">Roasted Lamb Rack, Bordelaise</p><p class="wi-note">Seared, roasted, rested. Bordelaise reduced to a glossy finish. Lyonnaise potato base.</p></div>
+      </div>
+      <div class="work-card" data-cat="dining">
+        <div class="work-img"><div class="work-ph ph-steak">Pan-Seared Steak</div></div>
+        <div class="work-info"><p class="wi-cat">Fine Dining</p><p class="wi-title">Pan-Seared Steak, Mushroom Ragout</p><p class="wi-note">Accuracy of doneness by touch. Ragout concentrated slow. Squash purée for texture contrast.</p></div>
+      </div>
+      <div class="work-card" data-cat="dining">
+        <div class="work-img"><div class="work-ph ph-salmon">Grilled Salmon</div></div>
+        <div class="work-info"><p class="wi-cat">Fine Dining</p><p class="wi-title">Grilled Salmon, Seafood Jus</p><p class="wi-note">Crisp skin, tender centre. Jus built from prawn shells and roe. Seafood roulade alongside.</p></div>
+      </div>
+      <div class="work-card" data-cat="pastry">
+        <div class="work-img"><div class="work-ph ph-eclair">Raspberry Éclair</div></div>
+        <div class="work-info"><p class="wi-cat">Pastry</p><p class="wi-title">Raspberry Araguani Éclair</p><p class="wi-note">Raspberry's acidity balanced against Araguani dark chocolate. French meringue for lift.</p></div>
+      </div>
+      <div class="work-card" data-cat="pastry">
+        <div class="work-img"><div class="work-ph ph-tart">Citrus Tart</div></div>
+        <div class="work-info"><p class="wi-cat">Pastry</p><p class="wi-title">Citrus Dulcey Tart</p><p class="wi-note">Dulcey's caramel sweetness lifted by orange zest. Pâte sucrée and jaconde base.</p></div>
+      </div>
+      <div class="work-card" data-cat="bread">
+        <div class="work-img"><div class="work-ph ph-bun">Enriched Dough</div></div>
+        <div class="work-info"><p class="wi-cat">Bread &amp; Viennoiserie</p><p class="wi-title">Enriched Dough &amp; Shio Pan</p><p class="wi-note">Sweet and savoury enriched doughs — working with butter, milk, and fermentation timing.</p></div>
+      </div>
+      <div class="work-card" data-cat="bread">
+        <div class="work-img"><div class="work-ph ph-sour">Sourdough</div></div>
+        <div class="work-info"><p class="wi-cat">Bread &amp; Viennoiserie</p><p class="wi-title">Sourdough &amp; Fermentation</p><p class="wi-note">Months of home and professional baking. Fermentation taught me patience and observation.</p></div>
+      </div>
+      <div class="work-card" data-cat="bread">
+        <div class="work-img"><div class="work-ph ph-vien">Viennoiserie</div></div>
+        <div class="work-info"><p class="wi-cat">Bread &amp; Viennoiserie</p><p class="wi-title">Viennoiserie Shaping &amp; Lamination</p><p class="wi-note">Croissant shaping and laminated doughs at Universal Bakehouse — high-volume, exacting, meditative.</p></div>
+      </div>
+      <div class="work-card" data-cat="private">
+        <div class="work-img"><div class="work-ph ph-priv">Tasting Table</div></div>
+        <div class="work-info"><p class="wi-cat">Private Dining</p><p class="wi-title">Jinny's Tasting Table</p><p class="wi-note">A home-based private dining project. Bread-centred menus, R&amp;D ideas tested in a real setting.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL CULINARY PERSPECTIVE -->
+<section id="global">
+  <div class="wrap section-pad">
+    <div class="global-intro fi">
+      <span class="label">Perspective</span>
+      <h2 class="h2">A global sense<br>of <em>craft</em></h2>
+      <div class="rule"></div>
+      <p class="global-sub">Visiting bakeries, markets, and culinary spaces across Europe and Asia has shaped how I see ingredients, precision, and hospitality.</p>
+    </div>
+    <div class="global-row fi d1">
+
+      <div class="global-card">
+        <img src="img-amam.jpeg" alt="Amam Dacotan, Tokyo" />
+        <div class="global-caption">
+          <span class="cap-place">Tokyo, Japan</span>
+          <span class="cap-note">Inspired by the precision and creativity of Japanese bakery culture</span>
+        </div>
+      </div>
+
+      <div class="global-card">
+        <img src="img-cedric.jpeg" alt="Salon du Chocolat, Paris" />
+        <div class="global-caption">
+          <span class="cap-place">Paris, France</span>
+          <span class="cap-note">A memorable moment at Salon du Chocolat — had the chance to see Chef Cédric Grolet in person</span>
+        </div>
+      </div>
+
+      <div class="global-card">
+        <img src="img-pasta-florence.jpeg" alt="Pasta workshop, Florence" />
+        <div class="global-caption">
+          <span class="cap-place">Florence, Italy</span>
+          <span class="cap-note">Hands-on fresh pasta workshop — flour, eggs, and the right amount of patience</span>
+        </div>
+      </div>
+
+      <div class="global-card">
+        <img src="img-dijon.jpeg" alt="Moutarderie Fallot, Beaune" />
+        <div class="global-caption">
+          <span class="cap-place">Beaune, France</span>
+          <span class="cap-note">La Moutarderie Fallot — Dijon mustard stone-ground since 1840</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section id="whyme">
+  <div class="wrap section-pad">
+    <div class="fi" style="max-width:36rem;">
+      <span class="label">What I bring</span>
+      <h2 class="h2">Why <em>Me</em></h2>
+      <div class="rule"></div>
+    </div>
+    <div class="whyme-grid fi d1">
+      <div class="why-card">
+        <span class="why-num">01</span>
+        <p class="why-title">Hands-on kitchen experience</p>
+        <p class="why-desc">From luxury resort kitchens to high-volume artisan bakeries — real work, not classroom simulations.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">02</span>
+        <p class="why-title">Bread &amp; pastry versatility</p>
+        <p class="why-desc">Comfortable across sourdough, viennoiserie, choux, tarts, and plated desserts. Still learning, always curious.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">03</span>
+        <p class="why-title">Calm under pressure</p>
+        <p class="why-desc">Service coordination, competition support, Michelin chef collaborations — I've learned to stay steady when it counts.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">04</span>
+        <p class="why-title">Global culinary curiosity</p>
+        <p class="why-desc">Markets, workshops, and bakeries across Europe and Asia. I pay attention wherever I go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap section-pad">
+    <div style="max-width:40rem;margin-bottom:3.5rem;" class="fi">
+      <span class="label">Foundation</span>
+      <h2 class="h2">The academic<br><em>backbone</em></h2>
+      <div class="rule"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-list fi">
+        <div class="edu-card">
+          <p class="edu-deg">BSc (Hons) in Culinary Management</p>
+          <p class="edu-inst">Sunway University, Malaysia</p>
+          <p class="edu-detail">2025–2027 · CGPA 3.50</p>
+        </div>
+        <div class="edu-card">
+          <p class="edu-deg">Bachelor in Management — Exchange</p>
+          <p class="edu-inst">Burgundy School of Business, France</p>
+          <p class="edu-detail">Sep – Dec 2025 · 16.13 / 20</p>
+        </div>
+        <div class="edu-card">
+          <p class="edu-deg">Diploma in Culinary Arts</p>
+          <p class="edu-inst">Sunway University · Le Cordon Bleu Certified</p>
+          <p class="edu-detail">2023–2025 · CGPA 3.31</p>
+        </div>
+      </div>
+      <div class="fi d1">
+        <div class="honors-grid">
+          <div class="honor"><span class="honor-n">01</span><p class="honor-t">Young Chef Full Scholarship</p><p class="honor-s">Competitive merit scholarship for culinary talent, Sunway University 2023</p></div>
+          <div class="honor"><span class="honor-n">02</span><p class="honor-t">Dean's List Award</p><p class="honor-s">Academic excellence, Faculty of Hospitality &amp; Tourism</p></div>
+          <div class="honor"><span class="honor-n">03</span><p class="honor-t">Exchange in Burgundy</p><p class="honor-s">Studied management at one of France's leading business schools</p></div>
+          <div class="honor"><span class="honor-n">04</span><p class="honor-t">Le Cordon Bleu Certified</p><p class="honor-s">Diploma certified by one of the world's most respected culinary institutions</p></div>
+        </div>
+        <div class="skills-row fi d2">
+          <span class="label">Professional Skills</span>
+          <div class="skills-pills">
+            <span class="skill">Kitchen Operations</span>
+            <span class="skill">Quality Control</span>
+            <span class="skill">Process Optimisation</span>
+            <span class="skill">Guest &amp; Dietary Awareness</span>
+            <span class="skill">Service Coordination</span>
+            <span class="skill">Cross-functional Teamwork</span>
+            <span class="skill">Mandarin · English · Bahasa Melayu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE DIRECTION -->
+<section id="future">
+  <div class="wrap section-pad">
+    <div class="future-inner">
+      <div class="fi">
+        <span class="label">Ambition</span>
+        <div class="future-quote">Where I hope<br>to <em>grow</em></div>
+      </div>
+      <div class="fi d1">
+        <p class="future-text" style="margin-bottom:1rem;">I hope to continue learning through high-standard kitchens, pastry teams, and bakery environments where discipline, creativity, and excellence are valued.</p>
+        <p class="future-text">My goal is to build strong foundations now — and eventually create culinary experiences that are meaningful, precise, and worth remembering.</p>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--soft);letter-spacing:0.05em;">Open to internships in fine dining kitchens, pastry teams, artisan bakeries, and luxury hospitality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <span class="contact-eyebrow fi">Get in Touch</span>
+    <h2 class="contact-headline fi d1">Let's create something<br><em>memorable together</em></h2>
+    <p class="contact-sub fi d2">Whether you're looking for a culinary intern, a passionate collaborator, or someone who can talk about fermentation for hours — I'd love to hear from you.</p>
+    <div class="contact-row fi d3">
+      <a href="mailto:jinnycham@gmail.com" class="c-link primary">jinnycham@gmail.com</a>
+      <a href="https://linkedin.com/in/jinsyen-cham" target="_blank" class="c-link">LinkedIn</a>
+      <a href="https://instagram.com/bite_mykitchen_" target="_blank" class="c-link">Instagram</a>
+      <a href="tel:+601642871717" class="c-link">016-428 7171</a>
+      <a href="#" class="c-link" download>Download CV</a>
+    </div>
+    <p class="contact-loc fi d4">Selangor, Malaysia</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Cham Jin Syen (Jinny Cham)</p>
+  <p>Crafted with intention</p>
+</footer>
+
+<script>
+  // Hero gallery
+  let cur = 0;
+  const slides = document.querySelectorAll('.gallery-slide');
+  const dots = document.querySelectorAll('.dot');
+  function goSlide(n) {
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active'); dots[cur].classList.add('active');
+  }
+  setInterval(() => goSlide((cur + 1) % slides.length), 4500);
+
+  // Fade-in observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+  document.querySelectorAll('.fi').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('vis');
+  });
+
+  // Work filter
+  function filterWork(cat, btn) {
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.work-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+      if (show) { card.style.opacity = '0'; card.style.transform = 'translateY(12px)'; setTimeout(() => { card.style.transition = 'opacity 0.35s, transform 0.35s'; card.style.opacity = '1'; card.style.transform = 'none'; }, 20); }
+    });
+  }
+
+  // Nav compact on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.padding = window.scrollY > 60 ? '0.7rem 3rem' : '1.2rem 3rem';
+    nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(44,31,19,0.07)' : 'none';
+  });
+</script>
+
+</body>
+</html>
